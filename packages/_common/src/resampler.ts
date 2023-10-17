@@ -15,6 +15,7 @@ export class Resampler {
         "nativeSampleRate is too low. Should have 16000 = targetSampleRate <= nativeSampleRate"
       )
     }
+    log.debug(`nativeSampleRate is ${options.nativeSampleRate}`)
     this.inputBuffer = []
   }
 

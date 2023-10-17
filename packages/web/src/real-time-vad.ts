@@ -71,7 +71,7 @@ export const defaultRealTimeVADOptions: RealTimeVADOptions = {
     log.debug("VAD misfire")
   },
   onSpeechStart: () => {
-    log.debug("Detected speech start")
+    log.debug("hi Detected speech start")
   },
   onSpeechEnd: () => {
     log.debug("Detected speech end")
