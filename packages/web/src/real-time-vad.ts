@@ -119,6 +119,7 @@ export class MicVAD {
 
     this.audioNodeVAD = await AudioNodeVAD.new(this.audioContext, this.options)
     this.audioNodeVAD.receive(source)
+    console.log(`hi sampleRate is ${this.audioContext.sampleRate}`)
   }
 
   pause = () => {
