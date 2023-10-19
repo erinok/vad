@@ -164,6 +164,7 @@ export class FrameProcessor implements FrameProcessorInterface {
       return {}
     }
     const probs = await this.modelProcessFunc(frame)
+    console.log(`p ${probs.isSpeech}`)
     this.audioBuffer.push({
       frame,
       isSpeech: probs.isSpeech >= this.options.positiveSpeechThreshold,

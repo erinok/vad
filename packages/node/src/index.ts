@@ -20,6 +20,7 @@ class NonRealTimeVAD extends PlatformAgnosticNonRealTimeVAD {
   static async new(
     options: Partial<NonRealTimeVADOptions> = {}
   ): Promise<NonRealTimeVAD> {
+    console.log("hello hi hello")
     return await this._new(modelFetcher, ort, options)
   }
 }

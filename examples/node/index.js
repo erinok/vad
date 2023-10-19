@@ -2,9 +2,16 @@ const vad = require("@ricky0123/vad-node")
 const wav = require("wav-decoder")
 const fs = require("fs")
 
-const audioSamplePath = `${__dirname}/test.wav`
+const audioSamplePath = `/Users/erin/mdm/Negotiator/Logs/vad-bad-start/audio.txt`
 
-function loadAudio(audioPath) {
+function loadNums(filePath) {
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const lines = fileContent.split('\n').filter(line => line.trim() !== '');
+  return [lines.map(line => parseFloat(line.trim())), 16000];
+}
+
+
+function loadWav(audioPath) {
   let buffer = fs.readFileSync(audioPath)
   let result = wav.decode.sync(buffer)
   let audioData = new Float32Array(result.channelData[0].length)
@@ -17,7 +24,9 @@ function loadAudio(audioPath) {
 }
 
 const main = async () => {
-  const [audioData, sampleRate] = loadAudio(audioSamplePath)
+  const path = process.argv[2];
+  const [audioData, sampleRate] = path.endsWith(".wav") ? loadWav(path) : loadNums(path);
+
   const myvad = await vad.NonRealTimeVAD.new()
   for await (const { audio, start, end } of myvad.run(audioData, sampleRate)) {
     console.log(`Speech segment: ${start}, ${end}`)
